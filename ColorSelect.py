@@ -1,3 +1,11 @@
+"""
+This module allow you to test values of hsv that you 
+have found if hsv_colopicker module.
+
+Just add this values to color variable of ColorSelect class
+in form like: "color_name": ((hmin, smin, vmin), (hmax, smax, vmax), (r, g, b))
+"""
+
 import numpy as np 
 import cv2 as cv
 
@@ -41,7 +49,7 @@ cv.namedWindow("frame")
 cap = cv.VideoCapture(0)
 
 clrslct = ColorSelect()
-colors = raw_input("Enter colors that you want to select(blue,red,green,skin,light\n")
+colors = raw_input("Enter colors that you want to select(blue, red, green, skin, light)\n")
 colors = colors.split(' ')
 
 while cap.isOpened():

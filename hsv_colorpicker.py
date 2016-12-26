@@ -1,14 +1,23 @@
-#!/usr/bin/env python
+"""
+This module allow you to choose minimums and maximums
+values of hsv parameters and select colors in this range
+"""
 
 import numpy as np
 import time
 import cv2 as cv
+
+def close(cap):
+	print("END with except")
+	cap.release()
+	cv.destroyAllWindows()
 
 def searchWite(minc, maxc):
 
 	def nothing(x):
 		pass
 
+	# windows initialization
 	cap = cv.VideoCapture(0)
 	cv.namedWindow("hsvTrack")
 	cv.namedWindow("hsv")
@@ -17,6 +26,7 @@ def searchWite(minc, maxc):
 	cv.moveWindow("hsv", 800,600)
 	cv.moveWindow("mask",400,0)
 
+	# trackbars initialization
 	cv.createTrackbar("Hmin", "hsvTrack", minc[0], 255, nothing)
 	cv.createTrackbar("Hmax", "hsvTrack", maxc[0], 255, nothing)
 	cv.createTrackbar("Smin", "hsvTrack", minc[1], 255, nothing)
@@ -48,20 +58,22 @@ def searchWite(minc, maxc):
 				vmax = cv.getTrackbarPos("Vmax", "hsvTrack")
 					
 				if cv.waitKey(1) & 0xFF == ord('q'):
-					print("End")
-					cap.release()
-					cv.destroyAllWindows()
+					close(cap)
 					return True
 			else:
 				return True
 	except KeyboardInterrupt:
-		print("END with except")
-		cap.release()
-		cv.destroyAllWindows()
+		close(cap)
 		return False
 
-minc = [0,0,0]
-maxc = [255,255,255]
+def close(cap):
+	print("END with except")
+	cap.release()
+	cv.destroyAllWindows()
 
-while searchWite(minc, maxc):
-	pass
+if __name__ == "__main__":
+	minc = [0,0,0]
+	maxc = [255,255,255]
+
+	while searchWite(minc, maxc):
+		pass

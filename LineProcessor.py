@@ -1,3 +1,7 @@
+"""
+This module desribe class that process vectors of incoming lines
+and returns couple of coordinates of x axes of left and right line
+"""
 import numpy as np
 
 class LineProcessor():
